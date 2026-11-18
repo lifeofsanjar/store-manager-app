@@ -1,3 +1,5 @@
+[Preview source](demo/index.html) — illustrative shop dashboard; no backend connection.
+
 # Store Manager
 
 Store Manager is a small sales and inventory system for one shop. It replaces a paper sales notebook with a web app used by staff at a laptop and by the owner on a phone. The shop-facing interface is in Uzbek Latin script.
@@ -27,3 +29,5 @@ Store Manager is a small sales and inventory system for one shop. It replaces a 
 ## Run locally
 
 Set up the [backend](<backend/README.md>) first, then start the [frontend](<frontend/README.md>). The frontend proxies API requests to the Django development server.
+
+
