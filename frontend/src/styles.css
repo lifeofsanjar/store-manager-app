@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #303030;
+  background: #f6f6f7;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+::selection { background: #cce8d7; color: #173b2d; }
+
+[class~="text-[#87928a]"],
+[class~="text-[#829087]"],
+[class~="text-[#819087]"],
+[class~="text-[#7b887f]"],
+[class~="text-[#7c887f]"],
+[class~="text-[#7a887f]"],
+[class~="text-[#78867d]"],
+[class~="text-[#77847b]"],
+[class~="text-[#728078]"],
+[class~="text-[#8c9890]"],
+[class~="text-[#9aa49d]"],
+[class~="text-[#9aa59d]"],
+[class~="text-[#a0aaa2]"],
+[class~="text-[#a1aaa3]"] {
+  color: #616161 !important;
+}
+
+input::placeholder {
+  color: #616161;
+  opacity: 1;
+}
+
+[class~="placeholder:text-[#a1aca4]"]::placeholder {
+  color: #616161 !important;
+}
