@@ -116,17 +116,17 @@ export default function StockView({ token, role }) {
 
   return (
     <>
-      <PageHeading title={TEXT.headings.stock} description={TEXT.descriptions.stock} />
+      <PageHeading icon="stock" title={TEXT.headings.stock} description={TEXT.descriptions.stock} />
       <Panel className="mt-5">
         <ProductLookup token={token} onSelect={(value) => { setProduct(value); setCount(String(value.stock_qty)); setSuccess(''); setError('') }} />
         {product ? (
-          <form onSubmit={saveSelected} className="mt-5 rounded-2xl border border-[#e8ede7] bg-[#fbfcfa] p-4 sm:p-5">
+          <form onSubmit={saveSelected} className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
-                <h2 className="text-base font-bold text-[#253c30]">{product.name}</h2>
-                <p className="mt-1 text-xs text-[#819087]">{product.barcode} · {TEXT.labels.buyPrice}: {money(product.buy_price)}</p>
+                <h2 className="text-base font-bold text-slate-800">{product.name}</h2>
+                <p className="mt-1 text-xs text-slate-500">{product.barcode} · {TEXT.labels.buyPrice}: {money(product.buy_price)}</p>
               </div>
-              {product.stock_qty < product.min_stock && <span className="rounded-full bg-[#fff3e2] px-3 py-1 text-xs font-semibold text-[#895b19]">{TEXT.errors.lowStockWarning}</span>}
+              {product.stock_qty < product.min_stock && <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">{TEXT.errors.lowStockWarning}</span>}
             </div>
             <div className="grid gap-3 sm:grid-cols-[minmax(0,240px)_auto] sm:items-end">
               <Field label={TEXT.labels.stockCount} type="number" min="0" step="1" value={count} onChange={(event) => setCount(event.target.value)} required />
@@ -140,8 +140,8 @@ export default function StockView({ token, role }) {
       <Panel className="mt-5">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div>
-            <h2 className="text-base font-bold text-[#253c30]">{TEXT.headings.allProducts}</h2>
-            <p className="mt-1 text-sm text-[#78867d]">{products.length} {TEXT.labels.item.toLowerCase()}</p>
+            <h2 className="text-base font-bold text-slate-800">{TEXT.headings.allProducts}</h2>
+            <p className="mt-1 text-sm text-slate-500">{products.length} {TEXT.labels.item.toLowerCase()}</p>
           </div>
         </div>
         {error && <div className="mb-4"><Notice>{error}</Notice></div>}
@@ -150,15 +150,15 @@ export default function StockView({ token, role }) {
           <div className="space-y-2.5">
             {products.map((item) => {
               const lowStock = item.stock_qty < item.min_stock
-              return <article key={item.id} className="rounded-xl border border-[#e8ede7] p-3.5 sm:p-4">
+              return <article key={item.id} className="rounded-xl border border-slate-200 p-3.5 sm:p-4">
                 <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="truncate text-sm font-semibold text-[#283e32]">{item.name}</h3>
-                      {lowStock && <span className="rounded-full bg-[#fff3e2] px-2.5 py-1 text-[11px] font-semibold text-[#895b19]">{TEXT.errors.lowStockWarning}</span>}
+                      <h3 className="truncate text-sm font-semibold text-slate-800">{item.name}</h3>
+                      {lowStock && <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">{TEXT.errors.lowStockWarning}</span>}
                     </div>
-                    <p className="mt-1 text-xs text-[#87928a]">{TEXT.labels.barcode}: {item.barcode}</p>
-                    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#68776d]">
+                    <p className="mt-1 text-xs text-slate-500">{TEXT.labels.barcode}: {item.barcode}</p>
+                    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600">
                       <span>{TEXT.labels.buyPrice}: {money(item.buy_price)}</span>
                       <span>{TEXT.labels.sellPrice}: {money(item.sell_price)}</span>
                       <span>{TEXT.labels.minStock}: {item.min_stock}</span>
@@ -166,8 +166,8 @@ export default function StockView({ token, role }) {
                   </div>
                   <div className="flex items-center justify-between gap-3 sm:justify-end">
                     <div className="text-right">
-                      <div className="text-xs text-[#87928a]">{TEXT.labels.stockCount}</div>
-                      <div className={`mt-0.5 text-lg font-bold ${lowStock ? 'text-[#895b19]' : 'text-[#274534]'}`}>{item.stock_qty} {TEXT.labels.quantity.toLowerCase()}</div>
+                      <div className="text-xs text-slate-500">{TEXT.labels.stockCount}</div>
+                      <div className={`mt-0.5 text-lg font-bold ${lowStock ? 'text-amber-700' : 'text-slate-800'}`}>{item.stock_qty} {TEXT.labels.quantity.toLowerCase()}</div>
                     </div>
                     <Button type="button" variant="secondary" onClick={() => startEditing(item)}>{TEXT.actions.edit}</Button>
                   </div>
@@ -177,14 +177,14 @@ export default function StockView({ token, role }) {
           </div>
         ) : <EmptyState>{TEXT.messages.productsEmpty}</EmptyState>}
       </Panel>
-      {editingProduct && <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#13251c]/45 p-4" onClick={() => !modalSaving && setEditingProduct(null)}>
+      {editingProduct && <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 p-4" onClick={() => !modalSaving && setEditingProduct(null)}>
         <section role="dialog" aria-modal="true" aria-labelledby="stock-edit-title" className="w-full max-w-lg rounded-2xl bg-white p-5 shadow-2xl sm:p-6" onClick={(event) => event.stopPropagation()}>
           <div className="mb-5 flex items-start justify-between gap-4">
             <div>
-              <h2 id="stock-edit-title" className="text-lg font-bold text-[#193b2e]">{TEXT.headings.editProduct}</h2>
-              <p className="mt-1 text-sm text-[#78867d]">{editingProduct.name} · {editingProduct.barcode}</p>
+              <h2 id="stock-edit-title" className="text-lg font-bold text-slate-900">{TEXT.headings.editProduct}</h2>
+              <p className="mt-1 text-sm text-slate-500">{editingProduct.name} · {editingProduct.barcode}</p>
             </div>
-            <button type="button" aria-label={TEXT.actions.cancel} disabled={modalSaving} onClick={() => setEditingProduct(null)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-2xl font-bold leading-none text-[#607067] transition hover:bg-[#f1f5f0] hover:text-[#193b2e] disabled:opacity-50">x</button>
+            <button type="button" aria-label={TEXT.actions.cancel} disabled={modalSaving} onClick={() => setEditingProduct(null)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-2xl font-bold leading-none text-slate-600 transition hover:bg-brand-50 hover:text-slate-900 disabled:opacity-50">x</button>
           </div>
           <form onSubmit={saveModal} className="space-y-4">
             <Field autoFocus label={TEXT.labels.stockCount} type="number" min="0" step="1" value={draft.stock_qty} onChange={(event) => setDraft((value) => ({ ...value, stock_qty: event.target.value }))} required />
