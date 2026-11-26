@@ -61,7 +61,7 @@ export default function ReturnView({ token }) {
 
   return (
     <>
-      <PageHeading title={TEXT.headings.returns} description={TEXT.descriptions.returns} />
+      <PageHeading icon="returns" title={TEXT.headings.returns} description={TEXT.descriptions.returns} />
       {success && <Notice tone="success">{success}</Notice>}
       <Panel className="mt-5">
         <form onSubmit={findSale} className="grid gap-3 sm:grid-cols-[minmax(0,240px)_auto] sm:items-end">
@@ -73,19 +73,19 @@ export default function ReturnView({ token }) {
 
       {sale && (
         <Panel className="mt-5">
-          <div className="flex flex-col gap-2 border-b border-[#edf0eb] pb-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 border-b border-slate-200 pb-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-base font-bold text-[#253c30]">#{sale.id} · {sale.staff_name}</h2>
-              <p className="mt-1 text-xs text-[#819087]">{dateTime(sale.created_at)} · {TEXT.labels.total}: {money(sale.total_amount)}</p>
+              <h2 className="text-base font-bold text-slate-800">#{sale.id} · {sale.staff_name}</h2>
+              <p className="mt-1 text-xs text-slate-500">{dateTime(sale.created_at)} · {TEXT.labels.total}: {money(sale.total_amount)}</p>
             </div>
-            {sale.debt > 0 && <span className="w-fit rounded-full bg-[#fff3e2] px-3 py-1.5 text-xs font-semibold text-[#895b19]">{TEXT.labels.debt}: {money(sale.debt)}</span>}
+            {sale.debt > 0 && <span className="w-fit rounded-full bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700">{TEXT.labels.debt}: {money(sale.debt)}</span>}
           </div>
           <div className="mt-4 space-y-3">
             {sale.items.map((item) => (
-              <div key={item.id} className="grid gap-3 rounded-xl border border-[#e8ede7] p-3.5 sm:grid-cols-[minmax(0,1fr)_110px_auto] sm:items-center">
+              <div key={item.id} className="grid gap-3 rounded-xl border border-slate-200 p-3.5 sm:grid-cols-[minmax(0,1fr)_110px_auto] sm:items-center">
                 <div className="min-w-0">
-                  <div className="truncate text-sm font-semibold text-[#283e32]">{item.product_name}</div>
-                  <div className="mt-1 text-xs text-[#87928a]">{item.quantity} {TEXT.labels.sold.toLowerCase()} · {item.returned_quantity} {TEXT.labels.returned.toLowerCase()} · {money(item.unit_price)}</div>
+                  <div className="truncate text-sm font-semibold text-slate-800">{item.product_name}</div>
+                  <div className="mt-1 text-xs text-slate-500">{item.quantity} {TEXT.labels.sold.toLowerCase()} · {item.returned_quantity} {TEXT.labels.returned.toLowerCase()} · {money(item.unit_price)}</div>
                 </div>
                 <Field
                   label={TEXT.labels.quantity}
@@ -98,7 +98,7 @@ export default function ReturnView({ token }) {
                   onChange={(event) => setQuantities({ ...quantities, [item.id]: event.target.value })}
                 />
                 <div className="flex items-center justify-between gap-3 sm:justify-end">
-                  <span className="text-xs text-[#7b887f]">{TEXT.labels.remaining}: {item.remaining_quantity}</span>
+                  <span className="text-xs text-slate-500">{TEXT.labels.remaining}: {item.remaining_quantity}</span>
                   <Button type="button" variant="secondary" disabled={!item.remaining_quantity || loading} onClick={() => submitReturn(item)}>{TEXT.actions.submitReturn}</Button>
                 </div>
               </div>

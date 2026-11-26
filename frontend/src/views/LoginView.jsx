@@ -27,20 +27,23 @@ export default function LoginView({ onLogin }) {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f6f6f7] px-4 py-10">
-      <div className="w-full max-w-md">
-        <div className="mb-7 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1b4937] text-lg font-bold text-white shadow-lg shadow-[#1b4937]/20">{TEXT.brandMark}</div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#193b2e]">{TEXT.appName}</h1>
-          <p className="mt-2 text-sm text-[#728078]">{TEXT.tagline}</p>
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 px-4 py-10">
+      <div aria-hidden="true" className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-600/40 blur-3xl" />
+      <div aria-hidden="true" className="absolute -bottom-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-emerald-500/25 blur-3xl" />
+      <div className="relative w-full max-w-md">
+        <div className="mb-8 text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 text-xl font-bold text-white shadow-xl shadow-brand-600/40">{TEXT.brandMark}</div>
+          <h1 className="text-3xl font-bold tracking-tight text-white">{TEXT.appName}</h1>
+          <p className="mt-2 text-sm text-slate-300">{TEXT.tagline}</p>
         </div>
-        <div className="rounded-2xl border border-[#e3e3e3] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)] sm:p-8">
-          <h2 className="text-xl font-bold text-[#20372c]">{TEXT.messages.welcome}</h2>
-          <p className="mt-1.5 text-sm leading-6 text-[#77847b]">{TEXT.messages.loginHint}</p>
+        <div className="rounded-3xl bg-white p-6 shadow-2xl shadow-black/30 sm:p-8">
+          <h2 className="text-xl font-bold text-slate-900">{TEXT.messages.welcome}</h2>
+          <p className="mt-1.5 text-sm leading-6 text-slate-500">{TEXT.messages.loginHint}</p>
           <form onSubmit={submit} className="mt-6 space-y-4">
             <Field
               label={TEXT.labels.login}
               autoComplete="username"
+              autoFocus
               value={login}
               onChange={(event) => setLogin(event.target.value)}
               required
@@ -54,7 +57,7 @@ export default function LoginView({ onLogin }) {
               required
             />
             {error && <Notice>{error}</Notice>}
-            <Button className="w-full" type="submit" disabled={loading || !login.trim() || !password}>
+            <Button className="min-h-12 w-full text-base" type="submit" disabled={loading || !login.trim() || !password}>
               {loading ? TEXT.messages.loading : TEXT.actions.login}
             </Button>
           </form>
